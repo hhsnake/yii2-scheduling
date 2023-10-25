@@ -1,9 +1,9 @@
 <?php
 
 namespace omnilight\scheduling;
+
 use yii\console\Controller;
 use yii\di\Instance;
-
 
 /**
  * Run the scheduled commands
