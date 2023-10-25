@@ -37,6 +37,9 @@
   "scripts": {
     "test": "vendor/bin/phpunit"
   },
+  "license": [
+      "MIT"
+  ],
   "config": {
     "allow-plugins": {
       "yiisoft/yii2-composer": true
