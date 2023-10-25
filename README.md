@@ -27,6 +27,7 @@ Description
 
 This project is inspired by the Laravel's Schedule component and tries to bring it's simplicity to the Yii framework.
 Quote from Laravel's documentation:
+Based on omnilight/yii2-scheduling with changes from many repositories to support symfony/process ^5.0|^6.0 
 
 ```
 In the past, developers have generated a Cron entry for each console command they wished to schedule.

@@ -7,7 +7,6 @@ use yii\base\Component;
 use yii\base\Application;
 use yii\mutex\FileMutex;
 
-
 /**
  * Class Schedule
  */
