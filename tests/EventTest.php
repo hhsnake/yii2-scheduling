@@ -1,8 +1,8 @@
 <?php
 
-namespace omnilight\scheduling\Tests;
+namespace hhsnake\scheduling\Tests;
 
-use omnilight\scheduling\Event;
+use hhsnake\scheduling\Event;
 use yii\mutex\Mutex;
 
 class EventTest extends \PHPUnit_Framework_TestCase

@@ -1,6 +1,6 @@
 {
-  "name": "omnilight/yii2-scheduling",
-  "description": "Scheduling extension for Yii2 framework",
+  "name": "hhsnake/yii2-scheduling",
+  "description": "Scheduling extension for Yii2 framework forked omnilight/yii2-scheduling",
   "keywords": [
     "yii",
     "scheduling",
@@ -18,7 +18,7 @@
     "php": ">=7.2.0",
     "yiisoft/yii2": "2.0.*",
     "symfony/process": "2.6.* || 3.* || 4.* || ^5.0|| ^6.0",
-    "dragonmantank/cron-expression": "1.*"
+    "dragonmantank/cron-expression": "^3.3"
   },
   "require-dev": {
     "phpunit/phpunit": "4.8.36"
@@ -28,11 +28,11 @@
   },
   "autoload": {
     "psr-4": {
-      "omnilight\\scheduling\\": "src"
+      "hhsnake\\scheduling\\": "src"
     }
   },
   "extra": {
-    "bootstrap": "omnilight\\scheduling\\Bootstrap"
+    "bootstrap": "hhsnake\\scheduling\\Bootstrap"
   },
   "scripts": {
     "test": "vendor/bin/phpunit"
