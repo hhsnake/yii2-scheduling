@@ -63,11 +63,10 @@ class Event extends Component
      */
     protected $_output = null;
     /**
-     * The string for redirection.
-     *
-     * @var array
+     * Append output or recreate
+     * @var bool 
      */
-    protected $_redirect = ' > ';
+    protected $_append = false;
     /**
      * The array of callbacks to be run after the event is finished.
      *
@@ -147,20 +146,21 @@ class Event extends Component
             $process = Process::fromShellCommandline($command, $cwd, null, null, null);
         }
         else {
-            $process = (new Process($command, $cwd, null, null, null));
+            $process = (new Process(explode(' ', $command), $cwd, null, null, null));
         }
         $process->run();
+        file_put_contents($this->_output, $process->getOutput(), $this->_append ? FILE_APPEND : 0);
         $this->callAfterCallbacks($app);
     }
 
     /**
-     * Build the comand string.
+     * Build the command string.
      *
      * @return string
      */
     public function buildCommand()
     {
-        $command = $this->command . $this->_redirect . $this->_output . (($this->_omitErrors) ? ' 2>&1 &' : '');
+        $command = $this->command . (($this->_omitErrors) ? ' 2>&1 &' : '');
         return $this->_user ? 'sudo -u ' . $this->_user . ' ' . $command : $command;
     }
 
@@ -590,7 +590,7 @@ class Event extends Component
      */
     public function sendOutputTo($location)
     {
-        $this->_redirect = ' > ';
+        $this->_append = false;
         $this->_output = $location;
         return $this;
     }
@@ -603,7 +603,7 @@ class Event extends Component
      */
     public function appendOutputTo($location)
     {
-        $this->_redirect = ' >> ';
+        $this->_append = true;
         $this->_output = $location;
         return $this;
     }
@@ -724,5 +724,20 @@ class Event extends Component
         } else {
             return '/dev/null';
         }
+    }
+
+
+    /**
+     * @param int $minTimeoutInterval // default 0 micro seconds
+     * @param $maxTimeoutInterval // default 10 seconds
+     * @return $this
+     */
+    public function withRandomInterval(int $minTimeoutInterval = 0, int $maxTimeoutInterval = 10 * 1000000): Event
+    {
+        $this->on(self::EVENT_BEFORE_RUN, function () use($minTimeoutInterval, $maxTimeoutInterval)  {
+            $delay = rand($minTimeoutInterval, $maxTimeoutInterval);
+            usleep($delay);
+        });
+        return $this;
     }
 }
